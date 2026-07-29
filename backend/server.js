@@ -18,16 +18,36 @@ app.use(express.json())
 app.use(cors())
 
 //db config
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-}, (err) => {
-    if (err) {
-        console.log(err)
-    } else {
-        console.log("DB Connected")
-    }
-})
+// mongoose.connect(process.env.MONGO_URI, {
+//     useNewUrlParser: true,
+// }, (err) => {
+//     if (err) {
+//         console.log(err)
+//     } else {
+//         console.log("DB Connected")
+//     }
+// })
 
+const connectDB = async () => {
+    try {
+        const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+
+        if (!mongoUri) {
+            throw new Error('MongoDB URI is not defined. Set MONGODB_URI or MONGO_URI in the backend .env file.');
+        }
+
+        const conn = await mongoose.connect(mongoUri, {
+            dbName: process.env.DB_NAME,
+        });
+
+        console.log(`mongoDB Connected:${conn.connection.host}`);
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+        process.exit(1);
+    }
+};
+
+connectDB();
 //api endpoints
 app.use("/api/user", userRouter)
 app.use("/api/task", taskRouter)
