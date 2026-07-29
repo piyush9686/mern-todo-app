@@ -20,7 +20,7 @@ function App() {
   const token = JSON.parse(localStorage.getItem("authToken"));
   const [tasks, dispatch] = useReducer(taskReducer, [])
   const [userToken, tokenDispatch] = useReducer(tokenReducer, token)
-  const [user, userDispatch] = useReducer(userReducer, {})
+  const [user, userDispatch] = useReducer(userReducer, null)
   useEffect(() => {
     console.log("App.js");
     const fetchUser = async () => {

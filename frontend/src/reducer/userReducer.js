@@ -5,7 +5,7 @@ function userReducer(user, action) {
             return action.payload;
         }
         case "UNSET_USER":{
-            return {};
+            return null;
         }
         default: return user;
     }
