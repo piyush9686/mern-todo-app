@@ -16,7 +16,7 @@ services:
     image: piyush0213agrawal/todo-frontend:latest
     container_name: todo-frontend-container
     ports:
-      - "3000:80"
+      - "80:80"
     depends_on:
       - backend
     networks:
