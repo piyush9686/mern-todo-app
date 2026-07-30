@@ -57,3 +57,15 @@ jobs:
         run: |  
           docker tag todo-frontend ${{ secrets.DOCKER_USERNAME }}/todo-frontend:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/todo-frontend:latest    
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/mern-todo
+            sudo docker-compose down
+            sudo docker-compose pull
+            sudo docker-compose up -d    
