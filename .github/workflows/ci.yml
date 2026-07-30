@@ -67,6 +67,10 @@ jobs:
           script: |
             cd ~/mern-todo
             git pull origin main
+
+            echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" > backend/.env
+            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> backend/.env
+            echo "PORT=${{ secrets.PORT }}" >> backend/.env
             sudo docker-compose down
             sudo docker-compose pull
             sudo docker-compose up -d    
