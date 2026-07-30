@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   backend:
-    build: ./backend
+    image: piyush0213agrawal/todo-backend:latest
     container_name: todo-backend-container
     ports:
       - "5000:5000"
@@ -13,7 +13,7 @@ services:
       - todo-network
 
   frontend:
-    build: ./frontend
+    image: piyush0213agrawal/todo-frontend:latest
     container_name: todo-frontend-container
     ports:
       - "3000:80"
